@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h2>User Prefrances</h2>
+        <label for="theme">theme</label>
+        <select id="theme">
+            <option value="">Select A theme</option>
+            <option value="dark">dark</option>
+            <option value="light">light</option>
+        </select>
+
+        <label for="notifications">Enable Notifications</label>
+        <select id="notifications">
+            <option value="">Select A theme</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+
+        <!-- <label for="theme">theme</label>
+        <select id="theme">
+            <option value="">Select A theme</option>
+            <option value="dark">dark</option>
+            <option value="light">light</option>
+        </select> -->
+        <label for="fontSize">Font Size:</label>
+        <input type="number" id="fontSize" placeholder="Enter Font Size">
+
+        <button id="saveBtn" class="disabled" disabled>Save Settings</button>
+
+        <h3>Current Settings:</h3>
+        <p>Theme: <span id="currentTheme"></span></p>
+        <p>Notifications: <span id="currentNotifications"></span></p>
+        <p>Font Size: <span id="currentFontSize"></span></p>
+    </div>
+    <script>
+        // Select all The Controlled elements From HTML
+        const themeSelect = document.getElementById('theme')
+        const notificationsSelect = document.getElementById('notifications')
+        const saveBtn = document.getElementById('saveBtn')
+        const fontSizeInput = document.getElementById('fontSize')
+
+        // Select The UI elements To Show The OutPut
+        const currentTheme = document.getElementById('currentTheme')
+        const currentNotifications = document.getElementById('currentNotifications')
+        const currentFontSize = document.getElementById('currentFontSize')
+
+        function checkForm(){
+            const isDisabled = themeSelect.value && notificationsSelect.value && fontSizeInput.value ? true : false;
+            console.log(isDisabled);
+            if(isDisabled){
+                saveBtn.classList.remove("disabled")
+                saveBtn.disabled = false
+            }else{
+                saveBtn.classList.add("disabled")
+                saveBtn.disabled = true
+            }
+        }
+
+        themeSelect.addEventListener('change',checkForm)
+        notificationsSelect.addEventListener('change',checkForm)
+        fontSizeInput.addEventListener('input',checkForm)
+
+        saveBtn.addEventListener('click', () => {
+            currentTheme.textContent = themeSelect.value
+            currentNotifications.textContent = notificationsSelect.value
+            currentFontSize.textContent = fontSizeInput.value
+        })
+    </script>
+</body>
+</html>
